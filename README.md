@@ -7,8 +7,8 @@ Dedupes node modules as they are being required  which works even when dependenc
 Loads `foo.js` module only twice.
 
 ```js
-var foo1 = require('./pack1/dep-uno/foo');
-var foo2 = require('./pack2/dep-uno/foo');
+var foo1 = require('./pack1/common/dep-uno/foo');
+var foo2 = require('./pack2/common/dep-uno/foo');
 
 console.log(foo1.foo);
 console.log(foo2.foo);
@@ -16,8 +16,8 @@ console.log(foo2.foo);
 console.log(foo1 === foo2);
 
 // =>
-// loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack1/dep-uno
-// loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack2/dep-uno
+// loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack1/common/dep-uno
+// loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack2/common/dep-uno
 // foobiloo
 // foobiloo
 // false
@@ -40,7 +40,7 @@ console.log(foo2.foo);
 console.log(foo1 === foo2);
 
 // =>
-// loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack1/dep-uno
+// loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack1/common/dep-uno
 // foobiloo
 // foobiloo
 // true
@@ -65,7 +65,7 @@ you are using the exact same version** of the packages whose modules you dedupe 
 
 ## API
 
-###*dedupe.activate([ext])*
+###*dedupe.activate([ext, subdirs])*
 
 ```
 /**
@@ -74,6 +74,11 @@ you are using the exact same version** of the packages whose modules you dedupe 
  * @name activate
  * @function
  * @param ext {String} (optional) extension for which to activate deduping (default: '.js')
+ * @param subdirs {Number} (optional) how many subdirs right above the module
+ *    have to be the same in order for it to be considered identical  (default: 2)
+ *
+ *  Example: sudirs: 2 -- x/foo/bar/main.js === y/foo/bar/main.js
+ *                        x/boo/bar/main.js !== y/foo/bar/main.js
  */
 ```
 

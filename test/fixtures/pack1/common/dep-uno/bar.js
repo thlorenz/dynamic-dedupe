@@ -1,4 +1,4 @@
 'use strict';
 
-require('../../count').count++;
+require('../../../count').count++;
 exports =  module.exports = { foo: 'foobiloo' };
