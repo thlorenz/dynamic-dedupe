@@ -1,6 +1,6 @@
 {
   "name": "dynamic-dedupe",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Dedupes node modules on the fly which works even when dependencies are linked via ln -s or npm link.",
   "main": "index.js",
   "scripts": {
