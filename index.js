@@ -15,7 +15,15 @@ function getHash(data) {
     .digest('hex');
 }
 
+/**
+ * Activates deduping for files with the given extension.
+ * 
+ * @name activate
+ * @function
+ * @param ext {String} (optional) extension for which to activate deduping (default: '.js')
+ */
 exports.activate = function (ext) { 
+  ext = ext || '.js';
   var ext_super = require.extensions[ext];
 
   require.extensions[ext] = function dedupingExtension(module, file) {
@@ -39,23 +47,24 @@ exports.activate = function (ext) {
   };
 };
 
+/**
+ * Deactivates deduping files with the given extension.
+ * 
+ * @name deactivate
+ * @function
+ * @param ext {String} (optional) extension for which to activate deduping (default: '.js')
+ */
 exports.deactivate = function (ext) {
+  ext = ext || '.js';
   require.extensions[ext] = extensions[ext];
 };
 
+/**
+ * Clears the registry that contains previously loaded modules.
+ * 
+ * @name reset
+ * @function
+ */
 exports.reset = function () {
   loadeds = {};
 };
-
-// Test
-if (!module.parent) {
-  
-  exports.activate('.js');
-  var count = require('./test/fixtures/count');
-  var foo1 = require('./test/fixtures/pack1/dep-uno/foo');
-  var foo2 = require('./test/fixtures/pack2/dep-uno/foo');
-  
-  console.log(count.count);
-  console.log(foo1);
-  console.log(foo2);
-}
