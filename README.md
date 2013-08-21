@@ -1,6 +1,6 @@
 # dynamic-dedupe
 
-Dedupes node modules on the fly which works even when dependencies are linked via ln -s or npm link.
+Dedupes node modules as they are being required  which works even when dependencies are linked via ln -s or npm link.
 
 ### Not deduped 
 
@@ -13,11 +13,14 @@ var foo2 = require('./pack2/dep-uno/foo');
 console.log(foo1.foo);
 console.log(foo2.foo);
 
+console.log(foo1 === foo2);
+
 // =>
 // loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack1/dep-uno
 // loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack2/dep-uno
 // foobiloo
 // foobiloo
+// false
 ```
 
 ### Deduped
@@ -34,12 +37,27 @@ var foo2 = require('./pack2/dep-uno/foo');
 console.log(foo1.foo);
 console.log(foo2.foo);
 
+console.log(foo1 === foo2);
+
 // =>
 // loading foo from /Users/thlorenz/dev/projects/dynamic-dedupe/example/pack1/dep-uno
 // foobiloo
 // foobiloo
+// true
 ```
 
+Here instead of loading `pack2/dep-uno/foo1.js` we will get a reference to the exports of `pack1/dep-uno/foo`.js`
+returned.
+
+
+## Why?
+
+In some cases an app may be split into multiple parts that need to get the same instance of a common dependency (i.e.
+Handlebars). This will work once you run `npm dedupe` from the main package. However once you try linking to a
+dependency via `npm link` or just `ln -s` it breaks.
+
+This is where dynamic-dedupe comes in since it dedupes your modules as they are being required. Just **make sure that
+you are using the exact same version** of the packages whose modules you dedupe in order for this to work reliably.
 
 ## Installation
 

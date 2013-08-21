@@ -3,3 +3,5 @@ var foo2 = require('./pack2/dep-uno/foo');
 
 console.log(foo1.foo);
 console.log(foo2.foo);
+
+console.log(foo1 === foo2);

@@ -1,7 +1,7 @@
 {
   "name": "dynamic-dedupe",
   "version": "0.1.0",
-  "description": "Dedupes node modules on the fly which works even when dependencies are linked via ln -s or npm link.",
+  "description": "Dedupes node modules as they are being required  which works even when dependencies are linked via ln -s or npm link.",
   "main": "index.js",
   "scripts": {
     "test-main": "tap test/*.js",
@@ -22,7 +22,7 @@
     "nave": "~0.4.3",
     "tap": "~0.4.3"
   },
-  "keywords": [],
+  "keywords": [ "dedupe", "npm", "require", "extension", "link" ],
   "author": {
     "name": "Thorsten Lorenz",
     "email": "thlorenz@gmx.de",
