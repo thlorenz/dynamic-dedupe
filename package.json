@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/thlorenz/dynamic-dedupe",
   "dependencies": {
-    "xtend": "~2.0.6"
+    "xtend": "^4.0.0"
   },
   "devDependencies": {
     "nave": "~0.4.3",
