@@ -2,11 +2,10 @@
 
 var fs     =  require('fs');
 var path   =  require('path');
-var xtend  =  require('xtend');
 var crypto =  require('crypto');
 
 var loadeds = {};
-var extensions = xtend(require.extensions);
+var extensions = Object.assign({}, require.extensions);
  
 function getHash(data) {
   return crypto
